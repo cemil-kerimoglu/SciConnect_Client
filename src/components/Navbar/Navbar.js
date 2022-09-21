@@ -36,7 +36,9 @@ const Navbar = () => {
     return (
         <div>
             <AppBar className={classes.appBar} position="static" color="inherit">
-                <img component={Link} to="/" src={logo} alt="sciconnect" height="75" />
+                <Link to="/">
+                    <img src={logo} alt="sciconnect" height="75" />
+                </Link>
                 <Toolbar>
                     <Search>
                         <SearchIcon />
