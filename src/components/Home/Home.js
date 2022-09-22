@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Grow, Grid, Paper, AppBar, TextField, Button } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { getPosts, getPostsBySearch } from '../../actions/posts';
+import { getPostsBySearch } from '../../actions/posts';
 import { useNavigate, useLocation } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
 import Pagination from '../Pagination/Pagination';
 import Posts from '../Posts/Posts';
 import Form from '../Form/Form';
-import { mergeClasses } from '@material-ui/styles';
 import useStyles from './styles';
 
 function useQuery() {
@@ -40,7 +39,7 @@ const Home = () => {
     }
 
     const handleKeyPress = (e) => {
-      if(e.keyCode === 13) { // 13 is the code for the enter key 
+      if(e.key === 'Enter') { 
         searchPost();
       }
     }
@@ -72,6 +71,7 @@ const Home = () => {
                           value={tags}
                           onAdd={handleAdd}
                           onDelete={handleDelete}
+                          onKeyPress={handleKeyPress}
                           label="Search Tags"
                           variant='outlined'
                         />

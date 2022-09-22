@@ -1,5 +1,5 @@
 import * as api from '../api';
-import { FETCH_ALL, FETCH_SEARCHED, START_LOADING, END_LOADING, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
+import { FETCH_ALL, FETCH_SEARCHED, FETCH_SEARCHED_AUTHOR, START_LOADING, END_LOADING, CREATE, UPDATE, DELETE, LIKE } from '../constants/actionTypes';
 
 export const getPosts = (page) => async (dispatch) => {
     try {
@@ -16,7 +16,20 @@ export const getPostsBySearch = (searchQuery) => async (dispatch) => {
     try {
         dispatch({ type: START_LOADING });
         const { data: { data } } = await api.fetchPostsBySearch(searchQuery);
+        console.log(data);
         dispatch({ type: FETCH_SEARCHED, payload: data });
+        dispatch({ type: END_LOADING });
+    } catch (error) {
+       console.log(error); 
+    }
+}
+
+export const getPostsByAuthor = (searchAuthor) => async (dispatch) => {
+    try {
+        dispatch({ type: START_LOADING });
+        const { data: { data } } = await api.fetchPostsByAuthor(searchAuthor);
+        console.log(data);
+        dispatch({ type: FETCH_SEARCHED_AUTHOR, payload: data });
         dispatch({ type: END_LOADING });
     } catch (error) {
        console.log(error); 

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { AppBar, Avatar, Toolbar, Typography, Button } from '@material-ui/core';
+import { AppBar, Avatar, Toolbar, Typography, Button, TextField } from '@material-ui/core';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { getPostsByAuthor } from '../../actions/posts'; // keep this in mind
 import decode from 'jwt-decode';
 import useStyles from './styles';
 import logo from '../../images/SciConnect_Logo.png';
-import SearchIcon from '@material-ui/icons/Search';
-import { Search, StyledInputBase } from './Search';
+
 
 const Navbar = () => {
     const classes = useStyles();
@@ -14,6 +14,26 @@ const Navbar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
+    const [author, setAuthor] = useState("");
+
+    const handleChange = (e) => {
+        setAuthor(e.target.value);
+      }
+  
+    const searchPost = () => {
+      if(author.trim()) {
+        dispatch(getPostsByAuthor({ author }));
+        navigate(`/posts/search?searchAuthor=${author}`);
+      } else {
+        navigate('/');
+      }
+    }
+  
+    const handleKeyPress = (e) => {
+      if(e.key === 'Enter') { 
+        searchPost();
+      }
+    }
 
     const logout = () => {
         dispatch({ type: 'LOGOUT' });
@@ -39,15 +59,15 @@ const Navbar = () => {
                 <Link to="/">
                     <img src={logo} alt="sciconnect" height="75" />
                 </Link>
-                <Toolbar>
-                    <Search>
-                        <SearchIcon />
-                        <StyledInputBase
-                          className={classes.search}
-                          placeholder="Search for people"
-                          inputProps={{ 'aria-label': 'search' }}
-                        />
-                    </Search>
+                    <TextField 
+                        name="search" 
+                        variant="outlined" 
+                        label="Search for people"
+                        onKeyPress={handleKeyPress}
+                        size='small'
+                        value={author}
+                        onChange={handleChange} 
+                    />
                     {user ? (
                         <div className={classes.profile}>
                             <Avatar className={classes.purple} alt={user.result.name} src={user.result.imageUrl}>{user.result.name.charAt(0)}</Avatar>
@@ -61,7 +81,6 @@ const Navbar = () => {
                             <Button component={Link} to="/signup" className={classes.green} variant="contained">Sign Up</Button>
                         </div>      
                     )}
-                </Toolbar>
             </AppBar>
         </div>
     );
