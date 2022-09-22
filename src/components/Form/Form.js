@@ -49,7 +49,7 @@ const Form = ( {currentId, setCurrentId }) => {
 
 
     return (
-        <Paper>
+        <Paper className={classes.paper} elevation={6}>
             <form autoComplete="off" noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
                 <Typography variant="h6">{currentId ? 'Edit' : 'Submit'} a Document</Typography>
                 <TextField name='title' variant='outlined' label="Title" fullWidth 
