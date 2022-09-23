@@ -1,6 +1,7 @@
 export const CREATE = 'CREATE';
 export const UPDATE = 'UPDATE';
 export const DELETE = 'DELETE';
+export const FETCH_POST = 'FETCH_POST';
 export const FETCH_ALL = 'FETCH_ALL';
 export const FETCH_SEARCHED = 'FETCH_SEARCHED';
 export const FETCH_SEARCHED_AUTHOR = 'FETCH_SEARCHED_AUTHOR';
