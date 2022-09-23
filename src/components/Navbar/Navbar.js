@@ -22,8 +22,8 @@ const Navbar = () => {
   
     const searchPost = () => {
       if(author.trim()) {
-        dispatch(getPostsByAuthor({ author }));
-        navigate(`/posts/search?searchAuthor=${author}`);
+        dispatch(getPostsByAuthor(author));
+        navigate(`/posts/search?searchAuthor=${author || 'none'}`);
       } else {
         navigate('/');
       }

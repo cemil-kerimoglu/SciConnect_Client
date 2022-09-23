@@ -25,6 +25,7 @@ export const getPostsBySearch = (searchQuery) => async (dispatch) => {
 }
 
 export const getPostsByAuthor = (searchAuthor) => async (dispatch) => {
+    console.log("searched author", searchAuthor)
     try {
         dispatch({ type: START_LOADING });
         const { data: { data } } = await api.fetchPostsByAuthor(searchAuthor);
