@@ -6,6 +6,7 @@ export const FETCH_ALL = 'FETCH_ALL';
 export const FETCH_SEARCHED = 'FETCH_SEARCHED';
 export const FETCH_SEARCHED_AUTHOR = 'FETCH_SEARCHED_AUTHOR';
 export const LIKE = 'LIKE';
+export const COMMENT = 'COMMENT';
 
 export const AUTH = 'AUTH';
 export const LOGOUT = 'LOGOUT';
