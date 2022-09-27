@@ -24,10 +24,11 @@ export const getPosts = (page) => async (dispatch) => {
 }
 
 export const getPostsBySearch = (searchQuery) => async (dispatch) => {
+    console.log(searchQuery)
     try {
         dispatch({ type: START_LOADING });
         const { data: { data } } = await api.fetchPostsBySearch(searchQuery);
-        console.log(data);
+        // console.log(data);
         dispatch({ type: FETCH_SEARCHED, payload: data });
         dispatch({ type: END_LOADING });
     } catch (error) {
@@ -49,6 +50,7 @@ export const getPostsByAuthor = (searchAuthor) => async (dispatch) => {
 }
 
 export const createPost = (post) => async (dispatch) => {
+    console.log("hello", post)
     try {
         dispatch({ type: START_LOADING });
         const { data } = await api.createPost(post);

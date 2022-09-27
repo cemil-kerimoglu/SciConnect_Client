@@ -5,14 +5,13 @@ import { Link, useNavigate } from 'react-router-dom';
 import useStyles from './styles';
 import Input from './Input';
 import logo from '../../images/SciConnect_Logo.png';
-import { signin, signup } from '../../actions/auth';
+import { signup } from '../../actions/auth';
 
-const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '' }
+const initialState = { firstName: '', lastName: '', email: '', password: '', confirmPassword: '', profilePicture: '' }
 
 const Auth = () => {
     const classes = useStyles();
     const [showPassword, setShowPassword] = useState(false);
-    // const [isSignup, setIsSignup] = useState(true);
     const [formData, setFormData] = useState(initialState);
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -21,7 +20,14 @@ const Auth = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(signup(formData, navigate))  
+        const newFormData = new FormData();
+        newFormData.append('firstName', formData.firstName);
+        newFormData.append('lastName', formData.lastName);
+        newFormData.append('email', formData.email);
+        newFormData.append('password', formData.password);
+        newFormData.append('confirmPassword', formData.confirmPassword);
+        newFormData.append('profilePicture', formData.profilePicture);
+        dispatch(signup(newFormData, navigate)) 
     }
 
     const handleChange = (e) => {
@@ -29,12 +35,10 @@ const Auth = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
-    /*
-    const switchMode = () => {
-        setIsSignup((prev) => !prev);
-        setShowPassword(false);
+    const uploadProfilePicture = (e) => {
+        console.log(e.target.files[0])
+        setFormData({ ...formData, profilePicture: e.target.files[0] });
     }
-    */
 
     return (
         <Container component="main" maxWidth="xs">
@@ -48,6 +52,7 @@ const Auth = () => {
                         <Input name="email" label="Email Address" handleChange={handleChange} type="email" />
                         <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword} />
                         <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" />
+                        <Input name="profilePicture" id="profilePicture" handleChange={uploadProfilePicture} type="file" />
                     </Grid>
                         <Button type="submit" fullWidth variant="contained" className={classes.submitgreen}> 
                             Sign Up

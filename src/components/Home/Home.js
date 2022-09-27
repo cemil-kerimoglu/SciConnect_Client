@@ -29,6 +29,9 @@ const Home = () => {
       setSearch(e.target.value);
     }
 
+    console.log(tags)
+    console.log(tags.join(','))
+
     const searchPost = () => {
       if(search.trim() || tags) {
         dispatch(getPostsBySearch({ search, tags: tags.join(',') }));

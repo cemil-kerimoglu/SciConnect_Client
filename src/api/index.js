@@ -20,5 +20,8 @@ export const deletePost = (id) => API.delete(`/posts/${id}`);
 export const likePost = (id) => API.patch(`/posts/${id}/likePost`);
 export const comment = (value, id) => API.post(`/posts/${id}/commentPost`, { value });
 
-export const signIn = (formData) => API.post('/user/signin', formData);
-export const signUp = (formData) => API.post('/user/signup', formData);
+export const signIn = (newFormData) => API.post('/user/signin', newFormData);
+export const signUp = (newFormData) => API.post('/user/signup', newFormData);
+
+// export const signIn = (formData) => API.post('/user/signin', formData);
+// export const signUp = (formData) => API.post('/user/signup', formData);

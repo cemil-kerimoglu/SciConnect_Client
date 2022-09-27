@@ -6,7 +6,7 @@ import Home from './components/Home/Home';
 import Auth from './components/Auth/Auth';
 import AuthSignUp from './components/Auth/AuthSignUp';
 import PostDetails from './components/PostDetails/PostDetails';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   // const user = JSON.parse(localStorage.getItem('profile'));
