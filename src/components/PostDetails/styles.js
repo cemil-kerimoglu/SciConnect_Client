@@ -49,4 +49,14 @@ export default makeStyles((theme) => ({
     overflowY: 'auto',
     marginRight: '30px',
   },
+  pdfViewer: {
+    width: '400px',
+    height: '400px',
+  },
+  buttonContainer: {
+    textAlign: 'center',
+  },
+  button: {
+    marginTop: '10px',
+  }
 }));

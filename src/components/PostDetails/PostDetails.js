@@ -7,6 +7,12 @@ import useStyles from './styles';
 import { getPost, getPostsBySearch } from '../../actions/posts';
 import CommentSection from './CommentSection';
 
+import { Viewer } from '@react-pdf-viewer/core'; // install this library
+// import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout'; // install this library
+import '@react-pdf-viewer/core/lib/styles/index.css';
+import '@react-pdf-viewer/default-layout/lib/styles/index.css';
+import { Worker } from '@react-pdf-viewer/core'; // install this library
+
 const PostDetails = () => {
 
   const { post, posts, isLoading } = useSelector((state) => state.posts);
@@ -14,6 +20,23 @@ const PostDetails = () => {
   const navigate = useNavigate();
   const classes = useStyles();
   const { id } = useParams();
+
+  // const defaultLayoutPluginInstance = defaultLayoutPlugin();
+
+  const onButtonClick = () => {
+      // using Java Script method to get PDF file
+      fetch(post.selectedFile).then(response => {
+          response.blob().then(blob => {
+              // Creating new object of PDF file
+              const fileURL = window.URL.createObjectURL(blob);
+              // Setting various property values
+              let alink = document.createElement('a');
+              alink.href = fileURL;
+              alink.download = 'SamplePDF.pdf';
+              alink.click();
+          })
+      })
+  }
 
   useEffect(() => {
     dispatch(getPost(id));
@@ -33,6 +56,7 @@ const PostDetails = () => {
            </Paper>
   }
 
+  const fileExtension = post.selectedFile.split('.').pop();
   const recommendedPosts = posts.filter((postItem) => postItem._id !== post._id ); 
   console.log(recommendedPosts);
 
@@ -51,9 +75,20 @@ const PostDetails = () => {
           <CommentSection post={post} />
           <Divider style={{ margin: '20px 0' }} />
         </div>
-        <div className={classes.imageSection}>
-          <img className={classes.media} src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt={post.title} />
-        </div>
+        { fileExtension !== 'pdf' ?
+          <div className={classes.imageSection}>
+            <img className={classes.media} src={post.selectedFile || 'https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png'} alt={post.title} />
+          </div>
+          : 
+          <div className={classes.buttonContainer}>
+            <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.worker.min.js">
+                <div className={classes.pdfViewer}>
+                  <Viewer fileUrl={post.selectedFile} />
+                </div>
+            </Worker>
+            <button className={classes.button} onClick={onButtonClick}> Download PDF </button>
+          </div>
+        } 
       </div>
       {recommendedPosts.length && (
         <div className={classes.section}>
