@@ -10,6 +10,12 @@ import { useDispatch } from 'react-redux';
 import { deletePost, likePost } from '../../../actions/posts';
 import { useNavigate } from 'react-router-dom';
 
+import { Viewer } from '@react-pdf-viewer/core'; // install this library
+// import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout'; // install this library
+import '@react-pdf-viewer/core/lib/styles/index.css';
+import '@react-pdf-viewer/default-layout/lib/styles/index.css';
+import { Worker } from '@react-pdf-viewer/core'; // install this library
+
 const Post = ({ post, setCurrentId }) => {
     const classes = useStyles();
     const dispatch = useDispatch();
@@ -46,16 +52,22 @@ const Post = ({ post, setCurrentId }) => {
         navigate(`/posts/${post._id}`);
     }
 
+    const fileExtension = post.selectedFile.split('.').pop();
+
     return (
         <Card className={classes.card} raised elevation={6}>
-            <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />
-            <div className={classes.overlay}>
-                <Typography variant="h6">{post.name}</Typography>
-                <Typography variant="body2">{moment(post.createdAt).fromNow()}</Typography>
-            </div>
+            { fileExtension !== 'pdf' ?
+                <CardMedia className={classes.media} image={post.selectedFile} title={post.title} />
+              :
+              <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.16.105/build/pdf.worker.min.js">
+                <div className={classes.pdfWrapper}>
+                  <Viewer fileUrl={post.selectedFile} />
+                </div>
+              </Worker>
+            }
             {(user?.result?._id === post?.creator) &&
                 <div className={classes.overlay2}>
-                    <Button style={{color: 'white'}} size='small' onClick={() => {setCurrentId(post._id)}}>
+                    <Button size='small' onClick={() => {setCurrentId(post._id)}}>
                         <MoreHorizIcon fontSize='medium' />
                     </Button>
                 </div>
@@ -65,6 +77,7 @@ const Post = ({ post, setCurrentId }) => {
                     <Typography variant='body2' color='textSecondary'>{post.tags.map((tag) => `#${tag} `)}</Typography>
                 </div>
                 <Typography className={classes.title} variant='h5' gutterBottom>{post.title}</Typography>
+                <Typography className={classes.title} variant="body1">by {post.name}</Typography>
                 <CardContent>
                     <Typography variant='body2' color="textSecondary" component='p' >{post.message}</Typography>
                 </CardContent>

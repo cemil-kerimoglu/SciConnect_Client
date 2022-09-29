@@ -67,10 +67,10 @@ const PostDetails = () => {
       <div className={classes.card}>
         <div className={classes.section}>
           <Typography variant="h3" component="h2">{post.title}</Typography>
-          <Typography gutterBottom variant="h6" color="textSecondary" component="h2">{post.tags.map((tag) => `#${tag} `)}</Typography>
           <Typography gutterBottom variant="body1" component="p">{post.message}</Typography>
-          <Typography variant="h6">Created by: {post.name}</Typography>
-          <Typography variant="body1">{moment(post.createdAt).fromNow()}</Typography>
+          <Typography variant="h6">Submitted by: {post.name}</Typography>
+          <Typography gutterBottom variant="body1">{moment(post.createdAt).fromNow()}</Typography>
+          <Typography variant="body2" color="textSecondary">{post.tags.map((tag) => `#${tag} `)}</Typography>
           <Divider style={{ margin: '20px 0' }} />
           <CommentSection post={post} />
           <Divider style={{ margin: '20px 0' }} />
@@ -95,13 +95,11 @@ const PostDetails = () => {
           <Typography gutterBottom variant='h5'>You might also be interested in:</Typography>
           <Divider />
           <div className={classes.recommendedPosts}>
-            {recommendedPosts.map(({ _id, title, message, name, likes, selectedFile }) => (
+            {recommendedPosts.map(({ _id, title, message, name, likes }) => (
               <div style={{ margin: '20px', cursor: 'pointer' }} onClick={() => openPost(_id)} key={_id}>
-                <Typography gutterBottom variant='h6'>{title}</Typography>
-                <Typography gutterBottom variant='subtitle2'>{name}</Typography>
+                <Typography variant='h6'>{title}</Typography>
+                <Typography gutterBottom variant='subtitle1'>by {name}</Typography>
                 <Typography gutterBottom variant='subtitle2'>{message}</Typography>
-                <Typography gutterBottom variant='subtitle1'>Likes: {likes.length}</Typography>
-                <img src={selectedFile} width='200px' />
               </div>
             ))}
           </div>

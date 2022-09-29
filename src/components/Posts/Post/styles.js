@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export default makeStyles({
+export default makeStyles((theme) => ({
   media: {
     height: 0,
     paddingTop: '56.25%',
@@ -18,20 +18,24 @@ export default makeStyles({
     flexDirection: 'column',
     justifyContent: 'space-between',
     borderRadius: '15px',
-    height: '100%',
+    // height: '100%',
     position: 'relative',
   },
   overlay: {
     position: 'absolute',
-    top: '20px',
-    left: '20px',
+    top: '100px',
+    left: '65px',
     color: 'white',
+    paddingLeft: '5px',
+    paddingRight: '5px',
+    paddingBottom: '2px',
+    backgroundColor: theme.palette.text.primary,
   },
   overlay2: {
     position: 'absolute',
     top: '20px',
-    right: '20px',
-    color: 'white',
+    right: '0.2px',
+    color: 'black',
   },
   grid: {
     display: 'flex',
@@ -53,4 +57,18 @@ export default makeStyles({
     display: 'block',
     textAlign: 'initial',
   },
-});
+  pdfViewer: {
+    width: '50px',
+    height: '50px',
+  },
+  buttonContainer: {
+    textAlign: 'center',
+  },
+  button: {
+    marginTop: '10px',
+  },
+  pdfWrapper: {
+    height: '150px',
+    overflow: 'hidden',
+  },
+}));
