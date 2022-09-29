@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { Container } from '@material-ui/core';
 import Navbar from './components/Navbar/Navbar';
@@ -10,6 +10,7 @@ import { Routes, Route } from 'react-router-dom';
 
 function App() {
   // const user = JSON.parse(localStorage.getItem('profile'));
+
 
   return (
     <Container maxwidth="xl">

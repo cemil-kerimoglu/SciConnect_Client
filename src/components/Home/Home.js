@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Container, Grow, Grid, Paper, AppBar, TextField, Button } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { getPostsBySearch } from '../../actions/posts';
+import { getPostsBySearch, getPostsByAuthor } from '../../actions/posts';
 import { useNavigate, useLocation } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
 import Pagination from '../Pagination/Pagination';
@@ -24,19 +24,19 @@ const Home = () => {
     const classes = useStyles();
     const [search, setSearch] = useState("");
     const [tags, setTags] = useState([]);
+    const [altTags, setAltTags] = useState([]);
 
     const handleChange = (e) => {
       setSearch(e.target.value);
     }
 
-    console.log(tags)
-    console.log(tags.join(','))
-
     const searchPost = () => {
-      if(search.trim() || tags) {
+      if(search.trim() || tags.length) {
+        console.log("Working",tags)
         dispatch(getPostsBySearch({ search, tags: tags.join(',') }));
         navigate(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`);
       } else {
+        console.log("test")
         navigate('/');
       }
     }
@@ -44,11 +44,21 @@ const Home = () => {
     const handleKeyPress = (e) => {
       if(e.key === 'Enter') { 
         searchPost();
+        setAltTags([]);
       }
     }
 
-    const handleAdd = (tag) => setTags([ ...tags, tag]);
-    const handleDelete = (tagToDelete) => setTags(tags.filter((tag) => tag !== tagToDelete));
+    const handleAdd = (tag) => {
+      setTags([ ...tags, tag]);
+      setAltTags([ ...tags]);
+    }
+
+    const handleDelete = (tagToDelete) => {
+      setTags(tags.filter((tag) => tag !== tagToDelete));
+      setAltTags(tags.filter((tag) => tag !== tagToDelete));
+    }
+
+    // console.log("test home", searchQuery, altTags, author)
 
     return (
         <div>
@@ -81,7 +91,7 @@ const Home = () => {
                         <Button onClick={searchPost} className={classes.searchButton} variant='contained' color="primary">Search</Button>
                       </AppBar>
                       <Form currentId={currentId} setCurrentId={setCurrentId} />
-                      {(!searchQuery && !tags.length) && (
+                      {(!searchQuery && !altTags.length) && (
                         <Paper elevation={6} className={classes.pagination}>
                           <Pagination page={page} />
                         </Paper>

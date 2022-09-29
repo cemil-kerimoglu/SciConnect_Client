@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AppBar, Avatar, Toolbar, Typography, Button, TextField } from '@material-ui/core';
+import { AppBar, Avatar, Typography, Button, TextField } from '@material-ui/core';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getPostsByAuthor } from '../../actions/posts'; // keep this in mind
@@ -16,10 +16,10 @@ const Navbar = () => {
     const location = useLocation();
     const [author, setAuthor] = useState("");
 
-    const handleChange = (e) => {
+    const handleChange = (e) => {  
         setAuthor(e.target.value);
       }
-  
+ 
     const searchPost = () => {
       if(author.trim()) {
         dispatch(getPostsByAuthor(author));
@@ -43,22 +43,20 @@ const Navbar = () => {
 
     useEffect(() => {
         const token = user?.token;
-
         if(token) {
             const decodedToken = decode(token);
-
             if(decodedToken.exp * 1000 < new Date().getTime()) logout();
         }
-
         setUser(JSON.parse(localStorage.getItem('profile')));
     }, [location])
+
 
     return (
         <div>
             <AppBar className={classes.appBar} position="static" color="inherit">
-                <Link to="/">
-                    <img src={logo} alt="sciconnect" height="75" />
-                </Link>
+                    <Link  to="/">
+                        <img src={logo} alt="sciconnect" height="75" />
+                    </Link>
                     <TextField 
                         name="search" 
                         variant="outlined" 
