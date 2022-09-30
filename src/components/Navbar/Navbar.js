@@ -8,13 +8,13 @@ import useStyles from './styles';
 import logo from '../../images/SciConnect_Logo.png';
 
 
-const Navbar = () => {
+const Navbar = ({ author, setAuthor }) => {
     const classes = useStyles();
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
-    const [author, setAuthor] = useState("");
+    // const [author, setAuthor] = useState();
 
     const handleChange = (e) => {  
         setAuthor(e.target.value);
@@ -54,7 +54,7 @@ const Navbar = () => {
     return (
         <div>
             <AppBar className={classes.appBar} position="static" color="inherit">
-                    <Link  to="/">
+                    <Link  to="/" onClick={() => setAuthor("")}>
                         <img src={logo} alt="sciconnect" height="75" />
                     </Link>
                     <TextField 
