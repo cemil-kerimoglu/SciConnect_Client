@@ -55,7 +55,7 @@ const Navbar = ({ author, setAuthor }) => {
     return (
         <div>
             <AppBar className={classes.appBar} position="static" color="inherit">
-                    <Link  to="/">
+                    <Link  to="/" onClick={() => setAuthor("")}>
                         <img src={logo} alt="sciconnect" height="75" />
                     </Link>
                     <TextField 

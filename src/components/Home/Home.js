@@ -28,9 +28,12 @@ const Home = ( { author }) => {
 
     // const { state } = useLocation();
     // console.log(state)
+    /*
     useEffect(() => {
       if(!searchQuery && !altTags.length && !author) dispatch(getPosts(page));
     }, [dispatch(getPosts), page, searchQuery, altTags, author]);
+    */
+    
   
 
     const handleChange = (e) => {
@@ -96,7 +99,7 @@ const Home = ( { author }) => {
                         <Button onClick={searchPost} className={classes.searchButton} variant='contained' color="primary">Search</Button>
                       </AppBar>
                       <Form currentId={currentId} setCurrentId={setCurrentId} />
-                      {(!searchQuery && !altTags.length) && (
+                      {(!searchQuery && !altTags.length && !author) && (
                         <Paper elevation={6} className={classes.pagination}>
                           <Pagination page={page} />
                         </Paper>
