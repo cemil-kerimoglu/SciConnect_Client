@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Paper, Typography, CircularProgress, Divider } from '@material-ui/core';
+import { Paper, Typography, CircularProgress, Divider, Button } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -86,7 +86,8 @@ const PostDetails = () => {
                   <Viewer fileUrl={post.selectedFile} />
                 </div>
             </Worker>
-            <button className={classes.button} onClick={onButtonClick}> Download PDF </button>
+            {/*<button className={classes.button} onClick={onButtonClick}> Download PDF </button>*/}
+            <Button variant="contained" onClick={onButtonClick} color="primary"> Download PDF </Button>
           </div>
         } 
       </div>
@@ -99,7 +100,7 @@ const PostDetails = () => {
               <div style={{ margin: '20px', cursor: 'pointer' }} onClick={() => openPost(_id)} key={_id}>
                 <Typography variant='h6'>{title}</Typography>
                 <Typography gutterBottom variant='subtitle1'>by {name}</Typography>
-                <Typography gutterBottom variant='subtitle2'>{message}</Typography>
+                {/*<Typography gutterBottom variant='subtitle2'>{message}</Typography>*/}
               </div>
             ))}
           </div>

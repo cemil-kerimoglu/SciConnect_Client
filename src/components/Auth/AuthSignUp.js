@@ -52,6 +52,7 @@ const Auth = () => {
                         <Input name="email" label="Email Address" handleChange={handleChange} type="email" />
                         <Input name="password" label="Password" handleChange={handleChange} type={showPassword ? "text" : "password"} handleShowPassword={handleShowPassword} />
                         <Input name="confirmPassword" label="Repeat Password" handleChange={handleChange} type="password" />
+                        <Typography style={{ marginLeft: '10px'}} variant='subtitle1'>Upload Profile Picture</Typography>
                         <Input name="profilePicture" id="profilePicture" handleChange={uploadProfilePicture} type="file" />
                     </Grid>
                         <Button type="submit" fullWidth variant="contained" className={classes.submitgreen}> 
