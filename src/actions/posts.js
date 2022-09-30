@@ -15,9 +15,7 @@ export const getPost = (id) => async (dispatch) => {
 export const getPosts = (page) => async (dispatch) => {
     try {
         dispatch({ type: START_LOADING });
-        console.log(page);
         const { data } = await api.fetchPosts(page);
-        console.log("test getPosts", data)
         dispatch({ type: FETCH_ALL, payload: data });
         dispatch({ type: END_LOADING });
     } catch (error) {
@@ -48,7 +46,6 @@ export const getPostsByAuthor = (searchAuthor) => async (dispatch) => {
 }
 
 export const createPost = (post) => async (dispatch) => {
-    console.log("hello", post)
     try {
         dispatch({ type: START_LOADING });
         const { data } = await api.createPost(post);
