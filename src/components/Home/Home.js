@@ -26,16 +26,12 @@ const Home = ( { author }) => {
     const [tags, setTags] = useState([]);
     const [altTags, setAltTags] = useState([]);
 
-    // const { state } = useLocation();
-    // console.log(state)
     /*
     useEffect(() => {
       if(!searchQuery && !altTags.length && !author) dispatch(getPosts(page));
     }, [dispatch(getPosts), page, searchQuery, altTags, author]);
     */
     
-  
-
     const handleChange = (e) => {
       setSearch(e.target.value);
     }
@@ -66,7 +62,6 @@ const Home = ( { author }) => {
       setAltTags(tags.filter((tag) => tag !== tagToDelete));
     }
 
-    console.log("test home", searchQuery, altTags, author)
 
     return (
         <div>

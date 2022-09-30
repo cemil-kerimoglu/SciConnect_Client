@@ -50,7 +50,6 @@ const Navbar = ({ author, setAuthor }) => {
         setUser(JSON.parse(localStorage.getItem('profile')));
     }, [location])
 
-    console.log(author)
 
     return (
         <div>
