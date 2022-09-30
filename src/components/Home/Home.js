@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Grow, Grid, Paper, AppBar, TextField, Button } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { getPostsBySearch, getPostsByAuthor } from '../../actions/posts';
+import { getPostsBySearch, getPosts, getPostsByAuthor } from '../../actions/posts';
 import { useNavigate, useLocation } from 'react-router-dom';
 import ChipInput from 'material-ui-chip-input';
 import Pagination from '../Pagination/Pagination';
@@ -14,7 +14,7 @@ function useQuery() {
 }
 
 
-const Home = () => {
+const Home = ( { author }) => {
     const [currentId, setCurrentId] = useState(0);
     const dispatch = useDispatch();
     const query = useQuery();
@@ -26,17 +26,22 @@ const Home = () => {
     const [tags, setTags] = useState([]);
     const [altTags, setAltTags] = useState([]);
 
+    // const { state } = useLocation();
+    // console.log(state)
+    useEffect(() => {
+      if(!searchQuery && !altTags.length && !author) dispatch(getPosts(page));
+    }, [dispatch(getPosts), page, searchQuery, altTags, author]);
+  
+
     const handleChange = (e) => {
       setSearch(e.target.value);
     }
 
     const searchPost = () => {
       if(search.trim() || tags.length) {
-        console.log("Working",tags)
         dispatch(getPostsBySearch({ search, tags: tags.join(',') }));
         navigate(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`);
       } else {
-        console.log("test")
         navigate('/');
       }
     }
@@ -58,7 +63,7 @@ const Home = () => {
       setAltTags(tags.filter((tag) => tag !== tagToDelete));
     }
 
-    // console.log("test home", searchQuery, altTags, author)
+    console.log("test home", searchQuery, altTags, author)
 
     return (
         <div>
