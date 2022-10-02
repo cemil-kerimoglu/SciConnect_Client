@@ -46,6 +46,7 @@ export default makeStyles((theme) => ({
   },
   commentsInnerContainer: {
     height: '200px',
+    width: '400px',
     overflowY: 'auto',
     marginRight: '30px',
   },
@@ -58,5 +59,19 @@ export default makeStyles((theme) => ({
   },
   button: {
     marginTop: '10px',
-  }
+  },
+  cardComment: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    borderRadius: '10px',
+    position: 'relative',
+    backgroundColor: 'lightgray',
+    marginBottom: '10px',
+  },
+  commentActions: {
+    padding: '0 4px 0 0',
+    display: 'flex',
+    justifyContent: 'space-evenly',
+  },
 }));

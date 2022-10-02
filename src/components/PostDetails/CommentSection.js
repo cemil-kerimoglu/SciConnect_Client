@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Typography, TextField, Button } from '@material-ui/core';
+import { Typography, TextField, Button, Card, CardActions } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import useStyles from './styles';
 import { commentPost } from '../../actions/posts';
@@ -26,6 +26,8 @@ const CommentSection = ({ post }) => {
         commentsRef.current.scrollIntoView({ behavior: 'smooth' });
     }
 
+    // const reversedComments = [...comments].reverse();
+
     return (
         <div>
             <div className={classes.commentsOuterContainer}>
@@ -33,8 +35,20 @@ const CommentSection = ({ post }) => {
                     <Typography gutterBottom variant="h6">Comments</Typography>
                     {comments.map((c, i) => (
                         <Typography key={i} gutterBottom variant='subtitle1'>
-                            <strong>{c.split(': ')[0]}</strong>
-                            {c.split(':')[1]}
+                            <Card className={classes.cardComment} key={i}>
+                                <strong>{c.split(': ')[0]}</strong>
+                                {c.split(':')[1]}
+                                {/*<CardActions className={/*classes.commentActions}>
+                                    <Button variant='text' style={{textTransform: 'none'}} size="small" color='primary'>
+                                        Like
+                                    </Button>
+                                    {(user?.result?._id === post?.creator) &&
+                                    <Button variant='text' style={{textTransform: 'none'}} size="small" color='secondary'>
+                                        Delete
+                                    </Button>
+                                    }
+                                </CardActions>*/}
+                            </Card>
                         </Typography>
                     ))}
                     <div ref={commentsRef} />
