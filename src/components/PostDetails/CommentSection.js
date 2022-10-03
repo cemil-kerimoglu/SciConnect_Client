@@ -5,7 +5,7 @@ import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useDispatch } from 'react-redux';
 import useStyles from './styles';
-import { commentPost } from '../../actions/posts';
+import { commentPost, deleteComment } from '../../actions/posts';
 
 const CommentSection = ({ post }) => {
     const classes = useStyles();
@@ -29,22 +29,12 @@ const CommentSection = ({ post }) => {
         commentsRef.current.scrollIntoView({ behavior: 'smooth' });
     }
 
-    const reversedComments = [...comments].reverse();
+    const handleDelete = async () => {
+        dispatch(deleteComment(post._id, comment._id))
+    }
 
-    /*
-    const Likes = () => {
-        if (likes.length > 0) {
-          return likes.find((like) => like === userId)
-            ? (
-              <><ThumbUpAltIcon fontSize="small" />&nbsp;{likes.length > 2 ? `You and ${likes.length - 1} others` : `${likes.length} like${likes.length > 1 ? 's' : ''}` }</>
-            ) : (
-              <><ThumbUpAltOutlined fontSize="small" />&nbsp;{likes.length} {likes.length === 1 ? 'Like' : 'Likes'}</>
-            );
-        }
-    
-        return <><ThumbUpAltOutlined fontSize="small" />&nbsp;Like</>;
-    };
-    */
+    // const reversedComments = [...comments].reverse();
+
 
 
     return (
@@ -52,7 +42,7 @@ const CommentSection = ({ post }) => {
             <div className={classes.commentsOuterContainer}>
                 <div className={classes.commentsInnerContainer}>
                     <Typography gutterBottom variant="h6">Comments</Typography>
-                    {reversedComments.map((c, i) => (
+                    {comments.map((c, i) => (
                         <Typography key={i} gutterBottom variant='subtitle1'>
                             <Card className={classes.cardComment} key={i}>
                                 <strong>{c.split(': ')[0]}</strong>
