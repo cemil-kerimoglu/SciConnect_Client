@@ -8,6 +8,7 @@ export const FETCH_SEARCHED_AUTHOR = 'FETCH_SEARCHED_AUTHOR';
 export const LIKE = 'LIKE';
 export const COMMENT = 'COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
+export const LIKE_COMMENT = 'LIKE_COMMENT';
 
 export const AUTH = 'AUTH';
 export const LOGOUT = 'LOGOUT';

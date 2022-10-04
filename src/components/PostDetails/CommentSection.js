@@ -5,7 +5,7 @@ import ThumbUpAltOutlined from '@material-ui/icons/ThumbUpAltOutlined';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { useDispatch } from 'react-redux';
 import useStyles from './styles';
-import { commentPost, deleteComment } from '../../actions/posts';
+import { commentPost, deleteComment, likeComment } from '../../actions/posts';
 
 const CommentSection = ({ post }) => {
     const classes = useStyles();
@@ -28,11 +28,7 @@ const CommentSection = ({ post }) => {
 
         commentsRef.current.scrollIntoView({ behavior: 'smooth' });
     }
-
-    const handleDelete = async () => {
-        dispatch(deleteComment(post._id, comment._id))
-    }
-
+    
     // const reversedComments = [...comments].reverse();
 
 
@@ -42,17 +38,25 @@ const CommentSection = ({ post }) => {
             <div className={classes.commentsOuterContainer}>
                 <div className={classes.commentsInnerContainer}>
                     <Typography gutterBottom variant="h6">Comments</Typography>
-                    {comments.map((c, i) => (
+                    {comments?.map((c, i) => (
                         <Typography key={i} gutterBottom variant='subtitle1'>
                             <Card className={classes.cardComment} key={i}>
-                                <strong>{c.split(': ')[0]}</strong>
-                                {c.split(':')[1]}
+                                <strong>{c?.content.split(': ')[0]}</strong>
+                                {c?.content.split(':')[1]}
                                 <CardActions className={classes.commentActions}>
-                                    <Button variant='text' style={{textTransform: 'none'}} size="small" color='primary'>
+                                    <Button variant='text' style={{textTransform: 'none'}} size="small" color='primary' onClick={() => {
+                                        dispatch(likeComment(post._id, c?._id));
+                                        setComments((previousComments) => 
+                                            previousComments.map((comment) => comment._id === c?._id ? c : comment ))
+                                        }}>
                                         Like
                                     </Button>
-                                    {(user?.result?._id === post?.creator) &&
-                                    <Button variant='text' style={{textTransform: 'none'}} size="small" color='secondary'>
+                                    {(user?.result?._id === c?.writtenBy) &&
+                                    <Button variant='text' style={{textTransform: 'none'}} size="small" color='secondary' onClick={() => {
+                                        dispatch(deleteComment(post._id, c?._id));
+                                        setComments((previousComments) => 
+                                            previousComments.filter((comment) => comment._id !== c?._id ))
+                                        }}>
                                         Delete
                                     </Button>
                                     }
