@@ -52,7 +52,7 @@ const Post = ({ post, setCurrentId }) => {
         navigate(`/posts/${post._id}`);
     }
 
-    const fileExtension = post.selectedFile.split('.').pop();
+    const fileExtension = post?.selectedFile.split('.').pop();
 
     return (
         <Card className={classes.card} raised elevation={6}>
