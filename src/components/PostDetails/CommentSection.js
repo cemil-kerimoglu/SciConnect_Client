@@ -28,10 +28,8 @@ const CommentSection = ({ post }) => {
         commentsRef.current.scrollIntoView({ behavior: 'smooth' });
     }
 
-<<<<<<< HEAD
     // const reversedComments = [...comments].reverse();
 
-=======
     /*
     const Likes = (c) => {
         if (c.likes.length > 0) {
@@ -57,9 +55,6 @@ const CommentSection = ({ post }) => {
     previousComments.map((comment) => comment._id === c?._id ? c : comment ))
     */
 
-
-
->>>>>>> after_deployment_improve
     return (
         <div>
             <div className={classes.commentsOuterContainer}>
@@ -68,7 +63,7 @@ const CommentSection = ({ post }) => {
                     {comments?.map((c, i) => (
                         <Typography key={i} gutterBottom variant='subtitle1'>
                             <Card className={classes.cardComment} key={i}>
-<<<<<<< HEAD
+
                                 <strong>{c.split(': ')[0]}</strong>
                                 {c.split(':')[1]}
                                 {/*<CardActions className={/*classes.commentActions}>
@@ -81,7 +76,6 @@ const CommentSection = ({ post }) => {
                                     </Button>
                                     }
                                 </CardActions>*/}
-=======
                                 <strong>{c?.content.split(': ')[0]}</strong>
                                 {c?.content.split(':')[1]}
                                 <CardActions className={classes.commentActions}>
@@ -96,7 +90,6 @@ const CommentSection = ({ post }) => {
                                     </Button>
                                     }
                                 </CardActions>
->>>>>>> after_deployment_improve
                             </Card>
                         </Typography>
                     ))}
