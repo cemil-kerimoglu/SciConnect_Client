@@ -8,6 +8,8 @@ const Posts = ({ setCurrentId }) => {
     const { posts, isLoading } = useSelector((state) => state.posts);
     const classes = useStyles();
     if(!posts.length && !isLoading) return 'CURRENTLY THERE ARE NO POSTS';
+
+    // const reversedPosts = [...posts].reverse();
     
     return (
         isLoading ? <CircularProgress /> : (
