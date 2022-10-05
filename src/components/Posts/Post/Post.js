@@ -52,7 +52,7 @@ const Post = ({ post, setCurrentId }) => {
         navigate(`/posts/${post._id}`);
     }
 
-    const fileExtension = post.selectedFile.split('.').pop();
+    const fileExtension = post?.selectedFile?.split('.').pop();
 
     return (
         <Card className={classes.card} raised elevation={6}>
@@ -77,7 +77,11 @@ const Post = ({ post, setCurrentId }) => {
                     <Typography variant='body2' color='textSecondary'>{post.tags.map((tag) => `#${tag} `)}</Typography>
                 </div>
                 <Typography className={classes.title} gutterBottom variant="body2">{moment(post.createdAt).fromNow()}</Typography>
+<<<<<<< HEAD
                 <Typography className={classes.title} variant='h5' gutterBottom>{post.title}</Typography>
+=======
+                <Typography className={classes.title} variant='h6' gutterBottom>{post.title}</Typography>
+>>>>>>> after_deployment_improve
                 <Typography className={classes.title} variant="body1">by {post.name}</Typography>
                 <CardContent>
                     <Typography variant='body2' color="textSecondary" component='p' >{post.message}</Typography>
@@ -87,7 +91,7 @@ const Post = ({ post, setCurrentId }) => {
                 <Button size="small" color='primary' disabled={!user?.result} onClick={handleLike}>
                     <Likes />
                 </Button>
-                {(user?.result?.googleId === post?.creator || user?.result?._id === post?.creator) &&
+                {(user?.result?._id === post?.creator) &&
                     <Button size="small" color='secondary' onClick={() => dispatch(deletePost(post._id)) }>
                         <DeleteIcon fontSize='small' />
                         Delete

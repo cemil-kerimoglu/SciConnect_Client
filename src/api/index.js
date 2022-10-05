@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 // const API = axios.create({ baseURL: 'http://localhost:5000' });
-const API = axios.create({ baseURL: 'https://sciconnect-server.onrender.com' });
+// const API = axios.create({ baseURL: 'https://sciconnect-server.onrender.com' });
+const API = axios.create({ baseURL: 'https://sciconnectserver.onrender.com' });
 
 API.interceptors.request.use((req) => {
     if(localStorage.getItem('profile')) {
@@ -20,6 +21,8 @@ export const updatePost = (id, updatedPost) => API.patch(`/posts/${id}`, updated
 export const deletePost = (id) => API.delete(`/posts/${id}`);
 export const likePost = (id) => API.patch(`/posts/${id}/likePost`);
 export const comment = (value, id) => API.post(`/posts/${id}/commentPost`, { value });
+export const deleteComment = (id, commentId) => API.delete(`/posts/${id}/comments/${commentId}`);
+export const likeComment = (id, commentId) => API.patch(`/posts/${id}/comments/${commentId}`);
 
 export const signIn = (newFormData) => API.post('/user/signin', newFormData);
 export const signUp = (newFormData) => API.post('/user/signup', newFormData);
