@@ -77,11 +77,7 @@ const Post = ({ post, setCurrentId }) => {
                     <Typography variant='body2' color='textSecondary'>{post.tags.map((tag) => `#${tag} `)}</Typography>
                 </div>
                 <Typography className={classes.title} gutterBottom variant="body2">{moment(post.createdAt).fromNow()}</Typography>
-<<<<<<< HEAD
-                <Typography className={classes.title} variant='h5' gutterBottom>{post.title}</Typography>
-=======
                 <Typography className={classes.title} variant='h6' gutterBottom>{post.title}</Typography>
->>>>>>> after_deployment_improve
                 <Typography className={classes.title} variant="body1">by {post.name}</Typography>
                 <CardContent>
                     <Typography variant='body2' color="textSecondary" component='p' >{post.message}</Typography>
