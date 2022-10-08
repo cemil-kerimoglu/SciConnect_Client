@@ -36,7 +36,6 @@ const Auth = () => {
     }
 
     const uploadProfilePicture = (e) => {
-        console.log(e.target.files[0])
         setFormData({ ...formData, profilePicture: e.target.files[0] });
     }
 
