@@ -42,16 +42,12 @@ const Form = ({ currentId, setCurrentId }) => {
       dispatch(createPost(newPostData));
     }
 
-    console.log(postData.tags)
-    console.log(newPostData)
-
     clear();
   };
 
   
 
   const uploadFile = (e) => {
-    console.log(e.target.files[0])
     setPostData({ ...postData, selectedFile: e.target.files[0] });
   }
 

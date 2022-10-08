@@ -58,7 +58,6 @@ const PostDetails = () => {
 
   const fileExtension = post.selectedFile.split('.').pop();
   const recommendedPosts = posts.filter((postItem) => postItem._id !== post._id ); 
-  console.log(recommendedPosts);
 
   const openPost = (_id) => navigate(`/posts/${_id}`);
 
