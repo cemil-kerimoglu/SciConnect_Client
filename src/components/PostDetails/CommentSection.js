@@ -28,8 +28,6 @@ const CommentSection = ({ post }) => {
         commentsRef.current.scrollIntoView({ behavior: 'smooth' });
     }
 
-    // const reversedComments = [...comments].reverse();
-
     /*
     const Likes = (c) => {
         if (c.likes.length > 0) {
@@ -55,6 +53,8 @@ const CommentSection = ({ post }) => {
     previousComments.map((comment) => comment._id === c?._id ? c : comment ))
     */
 
+
+
     return (
         <div>
             <div className={classes.commentsOuterContainer}>
@@ -63,19 +63,6 @@ const CommentSection = ({ post }) => {
                     {comments?.map((c, i) => (
                         <Typography key={i} gutterBottom variant='subtitle1'>
                             <Card className={classes.cardComment} key={i}>
-
-                                <strong>{c.split(': ')[0]}</strong>
-                                {c.split(':')[1]}
-                                {/*<CardActions className={/*classes.commentActions}>
-                                    <Button variant='text' style={{textTransform: 'none'}} size="small" color='primary'>
-                                        Like
-                                    </Button>
-                                    {(user?.result?._id === post?.creator) &&
-                                    <Button variant='text' style={{textTransform: 'none'}} size="small" color='secondary'>
-                                        Delete
-                                    </Button>
-                                    }
-                                </CardActions>*/}
                                 <strong>{c?.content.split(': ')[0]}</strong>
                                 {c?.content.split(':')[1]}
                                 <CardActions className={classes.commentActions}>
